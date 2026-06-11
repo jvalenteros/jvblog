@@ -57,15 +57,15 @@ page, and its pages are grouped there by `type`.
 
 ### Wiki links
 
-- `[[Aria Voss]]` links to that page from anywhere (post or world page).
-- `[[Aria Voss|the Captain]]` renders custom link text.
+- `[[John Doe]]` links to that page from anywhere (post or world page).
+- `[[John Doe|the Baker]]` renders custom link text.
 - Broken links render muted with a dashed underline so they're easy to spot.
 
 **Conventions & gotchas:**
 
 1. `title` should equal the filename: the filename is what `[[links]]` target.
 2. Page names must be unique site-wide for bare `[[Name]]` links. Same name in
-   two worlds? Disambiguate: `[[eldoria/characters/Aria Voss]]`.
+   two worlds? Disambiguate: `[[world/characters/John Doe]]`.
 3. The link map is built when the dev server starts, **after creating a brand
    new page, restart `npm run dev`** for links *to* it to resolve.
 4. Avoid two filenames differing only by letter case (Windows collision).
