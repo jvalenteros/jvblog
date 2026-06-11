@@ -14,7 +14,7 @@ Posts and lore are plain markdown with Obsidian-style `[[wiki-links]]`.
 
 ## Writing
 
-The **`content/` folder is an Obsidian vault** — open it directly in Obsidian
+The **`content/` folder is an Obsidian vault**: open it directly in Obsidian
 and write there. Publishing = commit + push (Vercel/Netlify rebuilds the site).
 
 ```
@@ -52,7 +52,7 @@ type: character         # world | character | location | lore | page
 ---
 ```
 
-Each world folder needs an `index.md` with `type: world` — that's its landing
+Each world folder needs an `index.md` with `type: world`, that's its landing
 page, and its pages are grouped there by `type`.
 
 ### Wiki links
@@ -63,10 +63,10 @@ page, and its pages are grouped there by `type`.
 
 **Conventions & gotchas:**
 
-1. `title` should equal the filename — the filename is what `[[links]]` target.
+1. `title` should equal the filename: the filename is what `[[links]]` target.
 2. Page names must be unique site-wide for bare `[[Name]]` links. Same name in
    two worlds? Disambiguate: `[[eldoria/characters/Aria Voss]]`.
-3. The link map is built when the dev server starts — **after creating a brand
+3. The link map is built when the dev server starts, **after creating a brand
    new page, restart `npm run dev`** for links *to* it to resolve.
 4. Avoid two filenames differing only by letter case (Windows collision).
 
@@ -78,10 +78,10 @@ After `npm run build`, unresolved wiki links carry `class="internal new"`:
 Get-ChildItem dist -Recurse -Filter *.html | Select-String 'class="internal new"'
 ```
 
-Zero hits = no broken links.
+Zero hits means no broken links.
 
 ## Deploying
 
 1. Set `site` in `astro.config.ts` to your real domain.
 2. Push the repo to GitHub and import it in [Vercel](https://vercel.com) or
-   [Netlify](https://netlify.com) — both auto-detect Astro; no config needed.
+   [Netlify](https://netlify.com) — both auto-detect Astro; there is no config needed.
