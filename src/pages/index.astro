@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostList from "../components/PostList.astro";
+import { getPosts, getWorlds } from "../lib/collections";
+
+const posts = (await getPosts()).slice(0, 5);
+const { landings } = await getWorlds();
+---
+
+<BaseLayout>
+  <section class="intro">
+    <h1>jvblog</h1>
+    <p>Thoughts and creative writing projects.</p>
+  </section>
+
+  <section>
+    <h2>Recent writing</h2>
+    <PostList posts={posts} />
+    <p style="margin-top: var(--space-3);"><a href="/posts/">All posts →</a></p>
+  </section>
+
+  <section>
+    <h2>Worlds</h2>
+    <ul class="world-cards">
+      {
+        landings.map((world) => (
+          <li>
+            <a href={`/worlds/${world.id}/`}>
+              <strong>{world.data.title}</strong>
+              {world.data.description && <span>{world.data.description}</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

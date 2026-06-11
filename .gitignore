@@ -1,0 +1,18 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# deploy
+.vercel/
+.netlify/
+
+# Obsidian: keep shared vault settings, ignore per-machine state
+content/.obsidian/*
+!content/.obsidian/app.json
+
+# environment
+.env
+.env.production

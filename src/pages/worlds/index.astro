@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getWorlds } from "../../lib/collections";
+
+const { landings } = await getWorlds();
+---
+
+<BaseLayout title="Worlds" description="Worldbuilding projects">
+  <section>
+    <h2>Worlds</h2>
+    <p style="color: var(--text-muted); margin-bottom: var(--space-3);">
+      Each world is a small wiki, start at the overview, then go on from there.
+    </p>
+    <ul class="world-cards">
+      {
+        landings.map((world) => (
+          <li>
+            <a href={`/worlds/${world.id}/`}>
+              <strong>{world.data.title}</strong>
+              {world.data.description && <span>{world.data.description}</span>}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,19 @@
+{
+  "name": "jvblog",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.3",
+    "@fontsource-variable/source-serif-4": "^5.2.9",
+    "astro": "^6.4.6",
+    "github-slugger": "^2.0.0"
+  }
+}

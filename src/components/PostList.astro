@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "./FormattedDate.astro";
+import TagBadge from "./TagBadge.astro";
+
+interface Props {
+  posts: CollectionEntry<"posts">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<ul class="post-list">
+  {
+    posts.map((post) => (
+      <li>
+        <a class="post-title" href={`/posts/${post.id}/`}>
+          {post.data.title}
+        </a>
+        <div class="post-meta">
+          <FormattedDate date={post.data.date} />
+          {post.data.tags.map((tag) => (
+            <TagBadge tag={tag} />
+          ))}
+        </div>
+      </li>
+    ))
+  }
+</ul>

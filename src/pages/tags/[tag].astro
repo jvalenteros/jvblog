@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostList from "../../components/PostList.astro";
+import { getTagMap } from "../../lib/collections";
+
+export async function getStaticPaths() {
+  const map = await getTagMap();
+  return [...map.entries()].map(([key, { tag, posts }]) => ({
+    params: { tag: key },
+    props: { tag, posts },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+---
+
+<BaseLayout title={`Tagged “${tag}”`} description={`Posts tagged ${tag}.`}>
+  <section>
+    <h2>Tagged “{tag}”</h2>
+    <PostList posts={posts} />
+    <p style="margin-top: var(--space-3);"><a href="/tags/">All tags →</a></p>
+  </section>
+</BaseLayout>

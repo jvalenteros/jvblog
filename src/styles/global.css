@@ -1,0 +1,368 @@
+/* ---------- tokens ---------- */
+:root {
+  --font-serif: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+  --measure: 65ch;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.75rem;
+  --space-5: 3rem;
+  --space-6: 5rem;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg: #fcfcfa;
+  --bg-subtle: #f3f2ee;
+  --text: #1f1e1c;
+  --text-muted: #6e6a63;
+  --accent: #8a3324;
+  --border: #e4e2dc;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #16151a;
+  --bg-subtle: #1f1e24;
+  --text: #e8e6e1;
+  --text-muted: #9b978f;
+  --accent: #d98b6f;
+  --border: #2c2b32;
+}
+
+/* ---------- reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- base ---------- */
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: calc(var(--measure) + 2 * var(--space-4));
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+main {
+  flex: 1;
+  padding-block: var(--space-5) var(--space-6);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 560;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--bg-subtle);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+pre {
+  padding: var(--space-3);
+  border-radius: 8px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-block: var(--space-5);
+}
+
+/* ---------- header / footer ---------- */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.monogram {
+  font-family: var(--font-serif);
+  font-weight: 640;
+  font-size: 1.3rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.site-header nav a {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.site-header nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- theme toggle ---------- */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  background: none;
+  border: none;
+  padding: var(--space-1);
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 6px;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
+  background: var(--bg-subtle);
+}
+
+[data-theme="light"] .theme-toggle .sun {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .moon {
+  display: none;
+}
+
+/* ---------- intro / sections ---------- */
+.intro {
+  padding-block: var(--space-4) var(--space-2);
+}
+
+.intro p {
+  color: var(--text-muted);
+  max-width: 45ch;
+}
+
+section + section {
+  margin-top: var(--space-5);
+}
+
+section > h2 {
+  margin-bottom: var(--space-3);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---------- post list ---------- */
+.post-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.post-title {
+  font-family: var(--font-serif);
+  font-weight: 560;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.post-title:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.post-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- tags ---------- */
+.tag {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0 var(--space-2);
+}
+
+.tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ---------- world cards ---------- */
+.world-cards {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.world-cards a {
+  display: block;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+}
+
+.world-cards a:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.world-cards strong {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  display: block;
+}
+
+.world-cards span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- breadcrumb ---------- */
+.breadcrumb {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-3);
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--accent);
+}
+
+/* ---------- article prose ---------- */
+.prose > header {
+  margin-bottom: var(--space-4);
+}
+
+.prose > header .post-meta {
+  margin-top: var(--space-2);
+}
+
+.prose :is(p, ul, ol, pre, blockquote, table) {
+  margin-block: var(--space-3);
+}
+
+.prose :is(h2, h3, h4) {
+  margin-block: var(--space-4) var(--space-3);
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: 1.5rem;
+}
+
+.prose blockquote {
+  border-inline-start: 3px solid var(--border);
+  padding-inline-start: var(--space-3);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* wiki links */
+.prose a.internal {
+  text-decoration-style: dotted;
+}
+
+/* unresolved wiki links — visibly broken */
+.prose a.internal.new {
+  color: var(--text-muted);
+  text-decoration-style: dashed;
+  cursor: help;
+}

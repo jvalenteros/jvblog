@@ -1,0 +1,28 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormattedDate from "../../components/FormattedDate.astro";
+import TagBadge from "../../components/TagBadge.astro";
+import { getPosts } from "../../lib/collections";
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="prose">
+    <header>
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <FormattedDate date={post.data.date} />
+        {post.data.tags.map((tag) => <TagBadge tag={tag} />)}
+      </div>
+    </header>
+    <Content />
+  </article>
+</BaseLayout>

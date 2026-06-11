@@ -1,0 +1,67 @@
+---
+import { render, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getWorlds } from "../../../lib/collections";
+
+export async function getStaticPaths() {
+  const { landings } = await getWorlds();
+  return landings.map((world) => ({
+    params: { world: world.id },
+    props: { world },
+  }));
+}
+
+const { world } = Astro.props;
+const { Content } = await render(world);
+
+const { pages } = await getWorlds();
+const worldPages = pages.filter((p) => p.id.startsWith(`${world.id}/`));
+
+const groupOrder = [
+  ["character", "Characters"],
+  ["location", "Locations"],
+  ["lore", "Lore"],
+  ["page", "Pages"],
+] as const;
+
+const groups = groupOrder
+  .map(([type, label]) => ({
+    label,
+    entries: worldPages
+      .filter((p) => p.data.type === type)
+      .sort((a, b) => a.data.title.localeCompare(b.data.title)),
+  }))
+  .filter((g) => g.entries.length > 0);
+---
+
+<BaseLayout title={world.data.title} description={world.data.description}>
+  <nav class="breadcrumb">
+    <a href="/worlds/">Worlds</a> / {world.data.title}
+  </nav>
+  <article class="prose">
+    <header>
+      <h1>{world.data.title}</h1>
+    </header>
+    <Content />
+  </article>
+
+  {
+    groups.map((group) => (
+      <section>
+        <h2>{group.label}</h2>
+        <ul class="post-list">
+          {group.entries.map((entry: CollectionEntry<"worlds">) => (
+            <li>
+              <a class="post-title" href={`/worlds/${entry.id}/`}>
+                {entry.data.title}
+              </a>
+              {entry.data.description && (
+                <div class="post-meta">{entry.data.description}</div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>

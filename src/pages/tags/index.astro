@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getTagMap } from "../../lib/collections";
+
+const tags = [...(await getTagMap()).entries()].sort((a, b) =>
+  a[1].tag.localeCompare(b[1].tag),
+);
+---
+
+<BaseLayout title="Tags" description="Browse posts by tag.">
+  <section>
+    <h2>Tags</h2>
+    <ul class="tag-list">
+      {
+        tags.map(([key, { tag, posts }]) => (
+          <li>
+            <a class="tag" href={`/tags/${key}/`}>
+              {tag} ({posts.length})
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

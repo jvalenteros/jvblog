@@ -1,0 +1,33 @@
+---
+import { render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getWorlds } from "../../../lib/collections";
+
+export async function getStaticPaths() {
+  const { pages } = await getWorlds();
+  return pages.map((entry) => {
+    const [world, ...rest] = entry.id.split("/");
+    return { params: { world, page: rest.join("/") }, props: { entry } };
+  });
+}
+
+const { entry } = Astro.props;
+const worldId = entry.id.split("/")[0];
+const { landings } = await getWorlds();
+const world = landings.find((w) => w.id === worldId);
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <nav class="breadcrumb">
+    <a href="/worlds/">Worlds</a> /
+    <a href={`/worlds/${worldId}/`}>{world?.data.title ?? worldId}</a> /
+    {entry.data.title}
+  </nav>
+  <article class="prose">
+    <header>
+      <h1>{entry.data.title}</h1>
+    </header>
+    <Content />
+  </article>
+</BaseLayout>
