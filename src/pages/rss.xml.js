@@ -1,5 +1,6 @@
 import rss from "@astrojs/rss";
 import { getPosts } from "../lib/collections";
+import { withBase } from "../lib/site";
 
 export async function GET(context) {
   const posts = await getPosts();
@@ -11,7 +12,7 @@ export async function GET(context) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
-      link: `/posts/${post.id}/`,
+      link: withBase(`/posts/${post.id}/`),
     })),
   });
 }

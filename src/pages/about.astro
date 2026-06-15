@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/site";
 ---
 
 <BaseLayout title="About" description="About Johann Valenteros.">
@@ -12,8 +13,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       worlds I've been building. Just For Fun.
     </p>
     <p>
-      Thoughts: <a href="/posts/">Posts</a>
-      Worlds: <a href="/worlds/">Worlds</a>
+      Thoughts: <a href={withBase("/posts/")}>Posts</a>
+      Worlds: <a href={withBase("/worlds/")}>Worlds</a>
     </p>
   </article>
 </BaseLayout>

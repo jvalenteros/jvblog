@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getWorlds } from "../../lib/collections";
+import { withBase } from "../../lib/site";
 
 const { landings } = await getWorlds();
 ---
@@ -15,7 +16,7 @@ const { landings } = await getWorlds();
       {
         landings.map((world) => (
           <li>
-            <a href={`/worlds/${world.id}/`}>
+            <a href={withBase(`/worlds/${world.id}/`)}>
               <strong>{world.data.title}</strong>
               {world.data.description && <span>{world.data.description}</span>}
             </a>

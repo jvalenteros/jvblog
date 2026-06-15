@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PostList from "../components/PostList.astro";
 import { getPosts, getWorlds } from "../lib/collections";
+import { withBase } from "../lib/site";
 
 const posts = (await getPosts()).slice(0, 5);
 const { landings } = await getWorlds();
@@ -16,7 +17,9 @@ const { landings } = await getWorlds();
   <section>
     <h2>Recent writing</h2>
     <PostList posts={posts} />
-    <p style="margin-top: var(--space-3);"><a href="/posts/">All posts →</a></p>
+    <p style="margin-top: var(--space-3);">
+      <a href={withBase("/posts/")}>All posts →</a>
+    </p>
   </section>
 
   <section>
@@ -25,7 +28,7 @@ const { landings } = await getWorlds();
       {
         landings.map((world) => (
           <li>
-            <a href={`/worlds/${world.id}/`}>
+            <a href={withBase(`/worlds/${world.id}/`)}>
               <strong>{world.data.title}</strong>
               {world.data.description && <span>{world.data.description}</span>}
             </a>

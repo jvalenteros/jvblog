@@ -1,5 +1,6 @@
 ---
 import { slug } from "github-slugger";
+import { withBase } from "../lib/site";
 
 interface Props {
   tag: string;
@@ -8,4 +9,4 @@ interface Props {
 const { tag } = Astro.props;
 ---
 
-<a class="tag" href={`/tags/${slug(tag)}/`}>{tag}</a>
+<a class="tag" href={withBase(`/tags/${slug(tag)}/`)}>{tag}</a>

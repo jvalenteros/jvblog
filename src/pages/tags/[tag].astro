@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PostList from "../../components/PostList.astro";
 import { getTagMap } from "../../lib/collections";
+import { withBase } from "../../lib/site";
 
 export async function getStaticPaths() {
   const map = await getTagMap();
@@ -18,6 +19,8 @@ const { tag, posts } = Astro.props;
   <section>
     <h2>Tagged “{tag}”</h2>
     <PostList posts={posts} />
-    <p style="margin-top: var(--space-3);"><a href="/tags/">All tags →</a></p>
+    <p style="margin-top: var(--space-3);">
+      <a href={withBase("/tags/")}>All tags →</a>
+    </p>
   </section>
 </BaseLayout>

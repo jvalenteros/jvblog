@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getTagMap } from "../../lib/collections";
+import { withBase } from "../../lib/site";
 
 const tags = [...(await getTagMap()).entries()].sort((a, b) =>
   a[1].tag.localeCompare(b[1].tag),
@@ -14,7 +15,7 @@ const tags = [...(await getTagMap()).entries()].sort((a, b) =>
       {
         tags.map(([key, { tag, posts }]) => (
           <li>
-            <a class="tag" href={`/tags/${key}/`}>
+            <a class="tag" href={withBase(`/tags/${key}/`)}>
               {tag} ({posts.length})
             </a>
           </li>

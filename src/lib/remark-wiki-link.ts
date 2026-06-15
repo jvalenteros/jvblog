@@ -1,5 +1,6 @@
 import { slug } from "github-slugger";
 import { slugifyPath } from "./wiki";
+import { withBase } from "./site";
 
 interface Options {
   permalinks: string[];
@@ -35,7 +36,7 @@ export default function remarkWikiLink(options: Options) {
     const match = permalinks.find(
       (p) => p === `/${candidate}` || p.endsWith(`/${candidate}`),
     );
-    return { url: (match ?? `/${candidate}`) + anchor, exists: !!match };
+    return { url: withBase(match ?? `/${candidate}`) + anchor, exists: !!match };
   }
 
   function split(value: string): MdNode[] {

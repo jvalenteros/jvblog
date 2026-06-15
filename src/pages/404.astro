@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/site";
 ---
 
 <BaseLayout title="Not found">
@@ -9,8 +10,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </header>
     <p>
       404: Page Not Found
-      <a href="/">home page</a>, <a href="/posts/">the posts</a>, or
-      <a href="/worlds/">the worlds</a>.
+      <a href={withBase("/")}>home page</a>,
+      <a href={withBase("/posts/")}>the posts</a>, or
+      <a href={withBase("/worlds/")}>the worlds</a>.
     </p>
   </article>
 </BaseLayout>

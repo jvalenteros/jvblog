@@ -1,4 +1,8 @@
+---
+import { withBase } from "../lib/site";
+---
+
 <footer class="site-footer">
   <span>© {new Date().getFullYear()} Johann Valenteros</span>
-  <a href="/rss.xml">RSS</a>
+  <a href={withBase("/rss.xml")}>RSS</a>
 </footer>

@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { getWorlds } from "../../../lib/collections";
+import { withBase } from "../../../lib/site";
 
 export async function getStaticPaths() {
   const { pages } = await getWorlds();
@@ -20,8 +21,8 @@ const { Content } = await render(entry);
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
   <nav class="breadcrumb">
-    <a href="/worlds/">Worlds</a> /
-    <a href={`/worlds/${worldId}/`}>{world?.data.title ?? worldId}</a> /
+    <a href={withBase("/worlds/")}>Worlds</a> /
+    <a href={withBase(`/worlds/${worldId}/`)}>{world?.data.title ?? worldId}</a> /
     {entry.data.title}
   </nav>
   <article class="prose">
