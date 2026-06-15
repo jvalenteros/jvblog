@@ -1,6 +1,6 @@
 # jvblog
 
-Minimalist blog + worldbuilding wiki, built with [Astro](https://astro.build).
+Minimalist experimetnal personal blog, built with [Astro](https://astro.build).
 Posts and lore are plain markdown with Obsidian-style `[[wiki-links]]`.
 
 ## Commands
@@ -42,7 +42,7 @@ draft: false            # drafts are visible in dev, excluded from builds
 ---
 ```
 
-World page (`content/worlds/eldoria/characters/Aria Voss.md`):
+Example world page (`content/worlds/eldoria/characters/Aria Voss.md`):
 
 ```yaml
 ---
